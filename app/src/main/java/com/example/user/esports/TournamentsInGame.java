@@ -35,7 +35,7 @@ public class TournamentsInGame extends AppCompatActivity {
 
 
 
-        public String url= "https://reqres.in/api/users?page=2";
+        public String url= "https://reqres.in/api/users/2";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,14 +74,11 @@ public class TournamentsInGame extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
-                            JSONArray array = new JSONArray(myResponse);
-                            for(int i=0;i<array.length();i++){
-                                JSONObject obj = array.getJSONObject(i);
-                                // get your data from jsonobject
-                                txtString = obj.get(name);
-                            }
 
+                            JSONObject json = new JSONObject(myResponse);
+                            txtString.setText(json.getJSONObject("data").getString("first_name")+ " "+json.getJSONObject("data").getString("last_name"));
                         }
+
                         catch (JSONException e) {
                             e.printStackTrace();
                         }
